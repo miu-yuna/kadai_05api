@@ -1,0 +1,230 @@
+<html lang="ja">
+    <link rel="stylesheet" href="css/style.css">
+<head>
+<meta charset="UTF-8">
+<title>AutoSuggest (Japanese)</title>
+    <style>html,body{height:100%;}body{padding:0;margin:0;}h1{padding:0;margin:0;font-size:50%;}#geocode{font-size: 120%;}</style>
+    
+</head>
+<header>
+
+</header>
+<body>
+<main>
+
+<div class="main-visual"> 
+    <img src="./img/01.png" alt="">
+
+<!--AutoSuggest[START]-->
+<div>エリア検索（都市、市区町村、Enter）</div>
+<div id="searchBoxContainer">
+    <input type="text" id="searchBox" class="searchbox-c">
+</div>
+<!--AutoSuggest[END]-->
+
+<!-- MAP[START] -->
+<div id="myMap" style='width:100%;height:90%;float:left;'></div>
+
+</div>
+
+
+<h3 class="h3">東京創業ステーションTAMA</h3>
+<p>立川駅北口徒歩７分</p>
+<a href="https://startup-station.jp/ts/">リンク</a>
+<br>
+
+<h4 class="h4">東京創業ステーション</h4>
+<p>アクセス:東京駅徒歩5分</p>
+<a href="https://startup-station.jp/m1/">リンク</a>
+<br>
+<h5 class="h5">BUSO AGORA</h5>
+<p>アクセス:JR横浜線中央改札口「町田」駅 徒歩3分、小田急線西口改札口「町田」駅 徒歩3分</p>
+<a href="https://www.incubation-office-agora.com">リンク</a>
+<br>
+
+<h6 class="h6">町田新産業創造センター</h6>
+<p>小田急線 町田駅から徒歩5分、JR横浜線 町田駅から徒歩8分</p>
+<a href="https://mbda.jp/">リンク</a>
+<br>
+<h7 class="h7">PO-TO（ポート）</h7>
+<p>JR中央線「東小金井」駅より徒歩5分</p>
+<a href="https://www.po-to.jp/">リンク</a>
+<br>
+
+<h2 class="h2">コワーキングCoCoプレイス</h2>
+<p>アクセス:京王相模原線、小田急線、多摩都市モノレール線「多摩センター駅」から徒歩5分</p>
+<a href="http://www.c-mam.co.jp/cocoplace/">リンク</a>
+
+</main>
+<!-- MAP[END] -->
+
+
+<script src="https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=" async defer></script>
+<script src="https://cdn.jsdelivr.net/gh/yamazakidaisuke/BmapQuery/js/BmapQuery.js"></script>
+<script>
+//****************************************************************************************
+// BingMaps&BmapQuery
+//****************************************************************************************
+//Init
+function GetMap(){
+    //------------------------------------------------------------------------
+    //1. Instance
+    //------------------------------------------------------------------------
+    const map = new Bmap("#myMap");
+    
+    //------------------------------------------------------------------------
+    //2. Display Map
+    //   startMap(lat, lon, "MapType", Zoom[1~20]);
+    //   MapType:[load, aerial,canvasDark,canvasLight,birdseye,grayscale,streetside]
+    //--------------------------------------------------
+    map.startMap(35.665100, 139.712000, "load", 10);
+
+    //-----------------------------------------------------
+    //3. AutoSuggest
+    // !! 日本地図で表示してる場合のみルート検索可能（各国毎）以下パラメータ指定で制御も可能 !!
+    // +  [ English => https://www.bing.com/...&setLang=en&setMkt=en-US ]
+    // +  [ Japan   => https://www.bing.com/...&setLang=ja&setMkt=ja-JP ]
+    //-----------------------------------------------------
+    // 用意するHTML:
+    // <h1>AutoSuggest（Enter city in text box）</h1>
+    // <div id='searchBoxContainer'>
+    //     <input type='text' id='searchBox'><button id="clear">Clear</button>
+    // </div>
+    //-----------------------------------------------------
+    map.selectedSuggestion("#searchBox","#searchBoxContainer");
+
+    //map.infobox(35.70336245901371, 139.41230011155963, "スタハTAMA", "Description"); 
+    //35.679395266851074, 139.76208726552957   
+    const title1 = "スタハTAMA";
+    const descript1 = '<div style="width:150px;color:red;">description</div>';
+    const actions1 =
+        [
+            //1.action
+            {
+    label: 'Click1',
+    eventHandler: function () {
+        // h3要素を取得
+        var h3Element = document.querySelector('h3');
+        
+        // h3要素が存在する場合にのみ実行
+        if (h3Element) {
+            // h3要素までスクロールする
+            h3Element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }}
+        ];
+    //Create Event to Infobox
+    map.onInfobox(35.70336245901371, 139.41230011155963, title1, descript1, actions1);
+
+    const title2 = "スタハ丸の内";
+    const descript2 = '<div style="width:150px;color:red;">description</div>';
+    const actions2 =
+        [
+            //1.action
+            {
+    label: 'Click2',
+    eventHandler: function () {
+        // h4要素を取得
+        var h4Element = document.querySelector('h4');
+        
+        // h4要素が存在する場合にのみ実行
+        if (h4Element) {
+            // h4要素までスクロールする
+            h4Element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }}
+        ];
+    //Create Event to Infobox
+    map.onInfobox(35.679395266851074, 139.76208726552957, title2, descript2, actions2);
+
+    const title3 = "BUSO AGORA";
+    const descript3 = '<div style="width:150px;color:red;">description</div>';
+    const actions3 =
+        [
+            //1.action
+            {
+    label: 'Click3',
+    eventHandler: function () {
+        // h5要素を取得
+        var h5Element = document.querySelector('h5');
+        
+        // h5要素が存在する場合にのみ実行
+        if (h5Element) {
+            // h5要素までスクロールする
+            h5Element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }}
+        ];
+    //Create Event to Infobox
+    map.onInfobox(35.54362295750148, 139.44701154038884, title3, descript3, actions3);
+
+    const title4 = "町田新産業創造センター";
+    const descript4 = '<div style="width:150px;color:red;">description</div>';
+    const actions4 =
+        [
+            //1.action
+            {
+    label: 'Click4',
+    eventHandler: function () {
+        // h5要素を取得
+        var h6Element = document.querySelector('h6');
+        
+        // h5要素が存在する場合にのみ実行
+        if (h6Element) {
+            // h5要素までスクロールする
+            h6Element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }}
+        ];
+    //Create Event to Infobox
+    map.onInfobox(35.54742133050104, 139.44471336737445, title4, descript4, actions4);
+
+    const title5 = "PO-TO";
+    const descript5 = '<div style="width:150px;color:red;">description</div>';
+    const actions5 =
+        [
+            //1.action
+            {
+    label: 'Click5',
+    eventHandler: function () {
+        // h7要素を取得
+        var h7Element = document.querySelector('h7');
+        
+        // h7要素が存在する場合にのみ実行
+        if (h7Element) {
+            // h7要素までスクロールする
+            h7Element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }}
+     ];
+    //Create Event to Infobox
+    map.onInfobox(35.70189886468422, 139.52870468706382, title5, descript5, actions5);
+
+    const title6 = "コワーキングCoCoプレイス";
+    const descript6 = '<div style="width:150px;color:red;">description</div>';
+    const actions6 =
+        [
+            //1.action
+            {
+    label: 'Click',
+    eventHandler: function () {
+        // h7要素を取得
+        var h2Element = document.querySelector('h2');
+        
+        // h7要素が存在する場合にのみ実行
+        if (h2Element) {
+            // h7要素までスクロールする
+            h2Element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }}
+     ];
+    //Create Event to Infobox
+    map.onInfobox(35.62261717479656, 139.42507182319866, title6, descript6, actions6);
+};
+
+
+
+    
+</script>
+</body>
+</html>
